@@ -1,7 +1,5 @@
 const express = require("express");
-// const http = require("http");
 const cors = require("cors");
-// const PORT = process.env.PORT;
 require("dotenv").config();
 const { connection } = require("./src/config/db");
 const { userRouter } = require("./src/routes/users.routes");
@@ -23,11 +21,11 @@ app.get("/", async (req, res) => {
   }
 });
 
-const server = app.listen(3002, async () => {
+const server = app.listen(process.env.PORT, async () => {
   try {
     await connection;
     console.log("Connected to the database successfully");
-    console.log(`Server is Runing on PORT ${3002}`);
+    console.log(`Server is Runing on PORT ${process.env.PORT}`);
   } catch (error) {
     console.log(error);
   }
@@ -35,7 +33,7 @@ const server = app.listen(3002, async () => {
 
 const io = socket(server, {
   cors: {
-    origin: `http://localhost:3000`,
+    origin: process.env.CLIENT_URL,
     credentials: true,
   },
 });
