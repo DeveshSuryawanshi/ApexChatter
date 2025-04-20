@@ -61,7 +61,6 @@ export default function ChatBox({
   }, []);
 
   useEffect(() => {
-    console.log(arrivalMsg);
     arrivalMsg && setMessages((prev) => [...prev, arrivalMsg]);
   }, [arrivalMsg]);
 

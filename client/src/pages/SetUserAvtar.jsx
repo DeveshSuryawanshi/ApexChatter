@@ -5,11 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { multiAvatarApi, setAvatarApi } from "../Api/apis";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Buffer } from "buffer";
 import { Bars } from "react-loader-spinner";
 import GetCookie from "../cookiesAndLocalStroage/GetCookie";
 import SetCookie from "../cookiesAndLocalStroage/SetCookie";
 import SetToLocalStroage from "../cookiesAndLocalStroage/SetToLS";
+import { SlRefresh } from "react-icons/sl";
 
 export default function SetUserAvtar() {
   const navigate = useNavigate();
@@ -50,28 +50,26 @@ export default function SetUserAvtar() {
           toast.error("Error setting avatar. Please try again", ToastOptions);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
 
+  const getAvatars = async () => {
+    setIsLoading(true);
+    try {
+      const image = await axios.get(
+        `${multiAvatarApi}/${Math.random() * 1000}`
+      );
+      setAvatars(image?.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const getAvatars = async () => {
-      try {
-        const data = [];
-        for (let i = 0; i < 4; i++) {
-          const image = await axios.get(
-            `${multiAvatarApi}/${Math.random() * 1000}`
-          );
-          const buffer = new Buffer(image.data);
-          data.push(buffer.toString("base64"));
-        }
-        setAvatars(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getAvatars();
   }, []);
 
@@ -112,6 +110,9 @@ export default function SetUserAvtar() {
         <SetProfileBtn onClick={handleSetProfile}>
           Set as your Profile Picture
         </SetProfileBtn>
+        <RefreshBtn onClick={getAvatars}>
+          <SlRefresh />
+        </RefreshBtn>
       </Container>
       <ToastContainer />
     </>
@@ -244,6 +245,51 @@ const SetProfileBtn = styled.button`
   font-weight: 600;
   transition: 0.5s ease-in-out;
   animation: fadeIn 1.5s forwards;
+
+  @media (max-width: 350px){
+    font-size: medium;
+  }
+
+  @media (max-width: 300px){
+    font-size: 12px;
+  }
+
+  &:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+`;
+
+const RefreshBtn = styled.button`
+  padding: 10px;
+  font-size: larger;
+  border: none;
+  border-radius: 5px;
+  background-color: #8c52fe;
+  color: white;
+  font-weight: 600;
+  transition: 0.5s ease-in-out;
+  animation: fadeIn 1.5s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
 
   @media (max-width: 350px){
     font-size: medium;

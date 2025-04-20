@@ -1,5 +1,6 @@
 const { UserModel } = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const multiavatar = require('@multiavatar/multiavatar')
 
 module.exports.register = async (req, res, next) => {
   try {
@@ -89,3 +90,17 @@ module.exports.getContacts = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.createAvatars = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const avtarAraay = [];
+    for (let i = 0; i < 4; i++) {
+      const avatar = multiavatar(id + i);
+      avtarAraay.push(btoa(avatar));
+    }
+    return res.status(200).json(avtarAraay);
+  } catch (error) {
+    next(error);
+  }
+}

@@ -23,11 +23,11 @@ app.get("/", async (req, res) => {
   }
 });
 
-const server = app.listen(8080, async () => {
+const server = app.listen(3002, async () => {
   try {
     await connection;
     console.log("Connected to the database successfully");
-    console.log(`Server is Runing on PORT ${8080}`);
+    console.log(`Server is Runing on PORT ${3002}`);
   } catch (error) {
     console.log(error);
   }

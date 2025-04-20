@@ -58,7 +58,7 @@ export default function Register() {
           navigate("/");
         }
       } catch (error) {
-        const msg = error.response.data.msg;
+        const msg = error?.response?.data?.msg;
         toast.error(msg, ToastOptions);
       }
     }
