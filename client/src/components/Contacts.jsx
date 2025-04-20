@@ -129,7 +129,7 @@ const SearchUser = styled.input`
 
 const ContactsList = styled.div`
   padding: 0px 10px;
-  height: 85vh;
+  max-height: 75vh;
   overflow: auto;
   &::-webkit-scrollbar {
     width: 0.2rem;
