@@ -100,8 +100,8 @@ export default function Chats() {
 }
 
 const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -109,8 +109,8 @@ const Container = styled.div`
   gap: 1rem;
 `;
 const Wrapper = styled.div`
-  width: 95vw;
-  height: 90vh;
+  width: 100%;
+  height: 100%;
   background-color: #00000076;
   border-radius: 5px;
   display: grid;
@@ -152,7 +152,7 @@ const Wrapper = styled.div`
 `;
 
 const ContactContainer = styled.div`
-  overflow: hidden;
+  height: 100%;
   @media (max-width: 650px) {
     display: none;
   }
@@ -160,8 +160,8 @@ const ContactContainer = styled.div`
 
 const ChatContainer = styled.div`
   width: 100%;
-  height: 90vh;
-  display: grid;
+  height: 100%;
+  /* display: grid; */
 
   @media (max-width: 690px) {
     height: 100vh;

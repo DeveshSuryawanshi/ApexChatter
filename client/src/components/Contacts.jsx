@@ -72,9 +72,18 @@ export default function Contacts({
 
 const Container = styled.div`
   width: 100%;
-  overflow: hidden;
+  height: 100vh;
+  overflow-y: scroll;
   background-color: #2e2e38;
   border-radius: 5px 0px 0px 5px;
+  &::-webkit-scrollbar {
+    width: 0;
+    &-thumb {
+      background-color: #8c52fe;
+      width: 0.1rem;
+      border-radius: 1rem;
+    }
+  }
 `;
 
 const Header = styled.div`
@@ -129,8 +138,8 @@ const SearchUser = styled.input`
 
 const ContactsList = styled.div`
   padding: 0px 10px;
-  max-height: 75vh;
-  overflow: auto;
+  height: 100vh;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0.2rem;
     &-thumb {

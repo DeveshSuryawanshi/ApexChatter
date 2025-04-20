@@ -109,11 +109,11 @@ export default function ChatBox({
 
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
   border-radius: 5px;
   display: grid;
   grid-template-rows: 15% 73% 12%;
   gap: 0.1rem;
-  overflow: hidden;
   
   @media (max-width: 650px) {
     grid-template-rows: 10% 78% 12%;
@@ -158,7 +158,7 @@ const MessagesList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  overflow: auto;
+  overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0.2rem;
     &-thumb {
